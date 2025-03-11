@@ -6,24 +6,22 @@
 /*   By: iharch <iharch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:23:51 by iharch            #+#    #+#             */
-/*   Updated: 2025/01/27 10:49:48 by iharch           ###   ########.fr       */
+/*   Updated: 2025/02/23 12:12:45 by iharch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static int	ft_atoi(char *str)
+static long	ft_atoi(char *str)
 {
-	int		r;
-	int		s;
-	int		i;
+	long		r;
+	long		s;
+	long		i;
 
 	r = 0;
 	s = 1;
 	i = 0;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -33,12 +31,17 @@ static int	ft_atoi(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		r = r * 10 + (str[i] - 48);
+		if (r * s > INT_MAX || r * s < INT_MIN)
+		{
+			write (2, "Error\n", 6);
+			exit(1);
+		}
 		i++;
 	}
 	return (r * s);
 }
 
-static int	ft_size(char **str)
+int	ft_size(char **str)
 {
 	int		i;
 	int		count;
@@ -53,7 +56,7 @@ static int	ft_size(char **str)
 	return (count);
 }
 
-static int	*to_tab(char **str)
+int	*to_tab(char **str)
 {
 	int		i;
 	int		j;
@@ -72,9 +75,8 @@ static int	*to_tab(char **str)
 		s = ft_split(str[i]);
 		while (s[j])
 		{
-			tab[count] = ft_atoi(s[j]);
+			tab[count++] = ft_atoi(s[j]);
 			j++;
-			count++;
 		}
 		ft_free(s);
 		i++;
@@ -99,8 +101,8 @@ int	is_repeat(char **str)
 		{
 			if (tab[i] == tab[j])
 			{
-				free(tab);
-				return (0);
+				write (2, "Error\n", 6);
+				exit (1);
 			}
 			j++;
 		}
