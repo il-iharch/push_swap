@@ -1,33 +1,43 @@
-NAME = push_swap.a
-CC = cc
-FLAGS = -Wall -Wextra -Werror
+NAME = push_swap
 
-SRC = 	ft_cheak.c\
+
+CC = cc
+
+CFLAGS = -Wall -Wextra -Werror 
+
+RM = rm -f
+
+SRC = 	parsing.c\
 		ft_split.c\
 		is_repeat.c\
+		linked_list.c\
+		push.c\
+		reverse_rotate.c\
+		rotate.c\
+		swap.c\
+		short_sort.c\
+		stack_operations_1.c\
+		sort_stack.c\
+		push_swap.c
 		
 
-
-OBJS1 = $(SRC:.c=.o)
+OBJS = $(SRC:.c=.o)
 
 
 INCLUDE = push_swap.h
 
-%.o : %.c $(INCLUDE) 
-	$(CC) $(FLAGS) -c $< -o $@
-	ar rc $(NAME) $@   
+all: $(NAME)
+ 
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-$(NAME) : $(OBJS1) 
-	
+%.o: %.c $(INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-all : $(NAME)
-	
-clean :
-	rm -rf $(OBJS1)
+clean:
+	$(RM) $(OBJS) 
 
-fclean : clean
-	rm -rf $(NAME)
+fclean: clean
+	$(RM) $(NAME) 
 
-re : fclean all
-
-.PHONY : clean
+re: fclean all 
