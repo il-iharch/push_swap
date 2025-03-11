@@ -6,7 +6,7 @@
 /*   By: iharch <iharch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:49:59 by iharch            #+#    #+#             */
-/*   Updated: 2025/01/27 11:43:15 by iharch           ###   ########.fr       */
+/*   Updated: 2025/03/04 13:35:24 by iharch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_cheak(char *str)
 		if (str[i] == '+' || str[i] == '-' )
 		{
 			if (!ft_isdigit(str[++i]))
-				return (0);	
+				return (0);
 		}
 		while (str[i])
 		{
@@ -60,4 +60,21 @@ int	ft_cheak(char *str)
 	else
 		return (0);
 	return (1);
+}
+
+void	parsing(char **str)
+{
+	int	i;
+
+	i = 1;
+	while (str[i])
+	{
+		if (ft_cheak(str[i]) == 0 || !str[i][0])
+		{
+			write(2, "Error\n", 6);
+			exit (1);
+		}
+		i++;
+	}
+	is_repeat(str);
 }
