@@ -1,0 +1,18 @@
+#!/bin/bash
+
+TEST_CASE=0
+
+while true; do
+    SEQ=$(seq 1 100 | sort -R | tr '\n' ' ')  # Generate and shuffle sequence
+    echo "| Sequence: $SEQ"
+    
+    ARG=$(./push_swap "${SEQ}" | wc -l | tr -d ' ')  # Count moves, remove spaces
+    TEST_CASE=$((TEST_CASE + 1))
+
+    echo "TEST CASE: $TEST_CASE"
+    
+    if [ "$ARG" -gt 700 ]; then
+        echo "We got him!!"
+        break
+    fi
+done
