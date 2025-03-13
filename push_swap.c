@@ -57,6 +57,7 @@ int	main(int ac, char **av)
 		if (size == 2 || size == 3 || size == 4 || size == 5)
 		{
 			quick_sort(stack_a, stack_b);
+			exit (0);
 		}
 		else
 			sort_stack(&stack_a, &stack_b);
